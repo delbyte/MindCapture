@@ -1,6 +1,10 @@
 import torch
 from transformers import BartForConditionalGeneration, BartTokenizer
 import json
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
 
 # Load the BART model and tokenizer for summarization
 summarization_model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn")
@@ -9,6 +13,9 @@ summarization_tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn
 # Load the BART model and tokenizer for classification
 classification_model = BartForConditionalGeneration.from_pretrained("facebook/bart-large")
 classification_tokenizer = BartTokenizer.from_pretrained("facebook/bart-large")
+
+class NoteInput(BaseModel):
+    text: str
 
 def summarize_text(text):
     inputs = summarization_tokenizer(text, return_tensors="pt", max_length=1024, truncation=True)
@@ -26,7 +33,7 @@ def save_note_with_category(note_text, notes_file="backend/data/notes.json"):
     
     # Load existing notes
     try:
-        with open("backend/data/notes.json", "r", encoding="utf-8") as f:
+        with open(notes_file, "r", encoding="utf-8") as f:
             notes_data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         notes_data = {}
@@ -38,7 +45,15 @@ def save_note_with_category(note_text, notes_file="backend/data/notes.json"):
         notes_data[category] = [{"summary": summary, "text": note_text}]
     
     # Save back to file
-    with open("backend/data/notes.json", "w", encoding="utf-8") as f:
+    with open(notes_file, "w", encoding="utf-8") as f:
         json.dump(notes_data, f, indent=4)
     
     return {"summary": summary, "category": category}
+
+@app.post("/process_note")
+def process_note(note: NoteInput):
+    try:
+        result = save_note_with_category(note.text)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
