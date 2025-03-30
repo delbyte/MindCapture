@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local AI Notes Tester</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Minimal inline styling for demonstration */
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea { width: 100%; max-width: 600px; }
+    button { padding: 8px 12px; margin-top: 8px; }
+    .note { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }  
+    .delete-btn { background-color: #e74c3c; color: #fff; border: none; padding: 6px 10px; cursor: pointer; margin-top: 5px; }  
+  </style>
+</head>
+<body>
+  <h1>Local AI Notes Tester</h1>
+  
+  <section>
+    <h2>Add a Note</h2>
+    <textarea id="noteContent" placeholder="Enter your note here..." rows="6"></textarea><br>
+    <button id="addNoteBtn">Add Note</button>
+  </section>
+
+  <section>
+    <h2>All Notes</h2>
+    <button id="getNotesBtn">Get All Notes</button>
+    <div id="notesContainer">
+      <!-- Notes will be dynamically inserted here with delete buttons -->
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
