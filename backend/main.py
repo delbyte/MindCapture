@@ -1,58 +1,79 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from transformers import pipeline
-import sqlite3
+from model import summarize_text, classify_text
+from database import init_db, get_all_notes, get_db_connection
+from fastapi.middleware.cors import CORSMiddleware
 
-# Initialize FastAPI
 app = FastAPI()
 
-# Load AI summarization model
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+# Allow frontend to talk to backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Ideally, restrict this to your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Database setup
-DB_PATH = "notes.db"
-
-def init_db():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS notes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content TEXT NOT NULL,
-            summary TEXT
-        )
-    """)
-    conn.commit()
-    conn.close()
-
+# Initialize the database
 init_db()
 
-# Request model
+# Request model for incoming notes
 class NoteRequest(BaseModel):
     content: str
 
-# Routes
+# Endpoint to add a note
 @app.post("/add-note/")
 def add_note(note: NoteRequest):
-    summary = summarizer(note.content, max_length=100, min_length=25, do_sample=False)[0]['summary_text']
+    try:
+        summary = summarize_text(note.content)
+        category = classify_text(note.content)
 
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO notes (content, summary) VALUES (?, ?)", (note.content, summary))
-    conn.commit()
-    conn.close()
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO notes (content, summary, category) VALUES (?, ?, ?)",
+            (note.content, summary, category)
+        )
+        conn.commit()
+        conn.close()
 
-    return {"message": "Note added successfully", "summary": summary}
+        return {"message": "Note added successfully", "summary": summary, "category": category}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
+# Endpoint to retrieve all notes
 @app.get("/notes/")
 def get_notes():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("SELECT id, content, summary FROM notes")
-    notes = [{"id": row[0], "content": row[1], "summary": row[2]} for row in cursor.fetchall()]
-    conn.close()
+    try:
+        notes = get_all_notes()
+        return {"notes": notes}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-    return {"notes": notes}
+# Request model for note deletion
+class DeleteNoteRequest(BaseModel):
+    id: int
+
+# Endpoint to delete a note by ID
+@app.delete("/notes/{note_id}")
+def delete_note(note_id: int):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        # Check if note exists
+        cursor.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
+        row = cursor.fetchone()
+        if not row:
+            conn.close()
+            raise HTTPException(status_code=404, detail="Note not found")
+        # Delete the note
+        cursor.execute("DELETE FROM notes WHERE id = ?", (note_id,))
+        conn.commit()
+        conn.close()
+        return {"message": f"Note {note_id} deleted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
