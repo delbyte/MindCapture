@@ -2,7 +2,7 @@
 
 ## 📝 MindCapture
 
-**An AI-Powered Note-Taking App for Real-Time Summarization and Categorization**
+**A completely local AI-Powered Note-Taking App for Real-Time Summarization and Categorization**
 
 ![GitHub Stars](https://img.shields.io/github/stars/delbyte/local-ai-notes?style=social)
 ![GitHub License](https://img.shields.io/github/license/delbyte/local-ai-notes)
