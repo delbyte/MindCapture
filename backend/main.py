@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from model import summarize_text, classify_text
-from database import init_db, get_all_notes, get_db_connection
+from database import init_db, get_all_notes, get_db_connection, get_notes_by_category, get_all_categories
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
 
 app = FastAPI()
 
@@ -28,12 +29,13 @@ def add_note(note: NoteRequest):
     try:
         summary = summarize_text(note.content)
         category = classify_text(note.content)
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO notes (content, summary, category) VALUES (?, ?, ?)",
-            (note.content, summary, category)
+            "INSERT INTO notes (content, summary, category, created_at) VALUES (?, ?, ?, ?)",
+            (note.content, summary, category, current_time)
         )
         conn.commit()
         conn.close()
@@ -48,6 +50,24 @@ def get_notes():
     try:
         notes = get_all_notes()
         return {"notes": notes}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Route to retrieve notes by category
+@app.get("/notes/category/{category}")
+def get_notes_by_category_route(category: str):
+    try:
+        notes = get_notes_by_category(category)
+        return {"notes": notes}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Route to get all categories
+@app.get("/categories/")
+def get_categories():
+    try:
+        categories = get_all_categories()
+        return {"categories": categories}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
