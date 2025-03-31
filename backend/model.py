@@ -25,6 +25,6 @@ def summarize_text(text):
 
 def classify_text(text):
     # Define candidate labels for classification; adjust as needed.
-    candidate_labels = ["depression", "motivation", "inspiration", "life", "love"]
+    candidate_labels = ["depression", "motivation", "inspiration", "life", "love", "diet", "coding", "advice", "idea", "money", "food", "exercise", "fitness"]
     result = classifier(text, candidate_labels)
     return result["labels"][0]
