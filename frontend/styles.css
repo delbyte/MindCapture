@@ -552,3 +552,71 @@ body::before {
     transform: translateY(100%);
   }
 }
+
+/* Microphone button styles */
+.button-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .record-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, rgba(244, 67, 54, 0.8) 0%, rgba(255, 87, 34, 0.8) 100%);
+  }
+  
+  .record-btn:hover {
+    background: linear-gradient(90deg, rgba(244, 67, 54, 1) 0%, rgba(255, 87, 34, 1) 100%);
+  }
+  
+  .record-btn.recording {
+    background: rgba(244, 67, 54, 1);
+    animation: pulse-recording 2s infinite;
+    box-shadow: 0 0 15px rgba(244, 67, 54, 0.5);
+  }
+  
+  @keyframes pulse-recording {
+    0% {
+      box-shadow: 0 0 5px rgba(244, 67, 54, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(244, 67, 54, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 5px rgba(244, 67, 54, 0.5);
+    }
+  }
+  
+  .recording-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(244, 67, 54, 1);
+    margin-top: 10px;
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+  }
+  
+  .recording-status.hidden {
+    display: none;
+    opacity: 0;
+  }
+  
+  .recording-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(244, 67, 54, 1);
+    border-radius: 50%;
+    animation: blink-recording 1s infinite;
+  }
+  
+  @keyframes blink-recording {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
