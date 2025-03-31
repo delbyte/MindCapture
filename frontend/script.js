@@ -63,7 +63,7 @@ document.getElementById("addNoteBtn").addEventListener("click", async () => {
 
 // View all notes button
 document.getElementById("viewAllNotesBtn").addEventListener("click", () => {
-  window.location.href = "all-notes.html";
+  window.location.href = "all_notes.html";
 });
 
 // View by category button
@@ -76,5 +76,5 @@ document.getElementById("viewByCategoryBtn").addEventListener("click", () => {
   
   // Store the selected category in session storage
   sessionStorage.setItem("selectedCategory", category);
-  window.location.href = "category-notes.html";
+  window.location.href = "category_notes.html";
 });
