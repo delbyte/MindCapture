@@ -9,7 +9,7 @@ app = FastAPI()
 # Allow frontend to talk to backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Ideally, restrict this to your frontend URL
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -22,7 +22,7 @@ init_db()
 class NoteRequest(BaseModel):
     content: str
 
-# Endpoint to add a note
+# Route to add a note
 @app.post("/add-note/")
 def add_note(note: NoteRequest):
     try:
@@ -42,7 +42,7 @@ def add_note(note: NoteRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Endpoint to retrieve all notes
+# Route to retrieve all notes
 @app.get("/notes/")
 def get_notes():
     try:
@@ -51,17 +51,13 @@ def get_notes():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Request model for note deletion
-class DeleteNoteRequest(BaseModel):
-    id: int
-
-# Endpoint to delete a note by ID
+# Route to delete a note by ID
 @app.delete("/notes/{note_id}")
 def delete_note(note_id: int):
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        # Check if note exists
+        # Check if the note exists
         cursor.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
         row = cursor.fetchone()
         if not row:
