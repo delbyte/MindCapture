@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>All Notes - AI Notes App</title>
-  <!-- Link to external CSS file -->
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Notes - MindCapture</title>
+<!-- Link to external CSS file -->
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>All Notes</h1>
+<div class="container header-container">
+  <div class="logo-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brain-logo">
+      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"></path>
+      <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"></path>
+    </svg>
+    <h1>All Notes</h1>
+  </div>
+</div>
+<div class="container">
   <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
   
-  <div id="notesContainer" class="container">
+  <div id="notesContainer" class="notes-container">
     <!-- Notes will be loaded here -->
     <p id="loadingText">Loading notes...</p>
   </div>
+</div>
 
-  <script src="all_notes.js"></script>
+<script src="all_notes.js"></script>
 </body>
 </html>
+

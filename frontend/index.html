@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Notes App</title>
-  <!-- Link to external CSS file -->
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindCapture</title>
+<!-- Link to external CSS file -->
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>AI Notes App</h1>
+<div class="container header-container">
+  <div class="logo-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brain-logo">
+      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"></path>
+      <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"></path>
+    </svg>
+    <h1>MindCapture</h1>
+  </div>
+</div>
+
+<div class="container">
+  <h2>What's on your mind?</h2>
+  <textarea id="noteContent" placeholder="Enter your note here..." rows="6"></textarea><br>
+  <button id="addNoteBtn">Add Note</button>
+</div>
+
+<div class="container">
+  <h2>View Notes</h2>
+  <button id="viewAllNotesBtn">View All Notes</button>
   
-  <div class="container">
-    <h2>Add a New Note</h2>
-    <textarea id="noteContent" placeholder="Enter your note here..." rows="6"></textarea><br>
-    <button id="addNoteBtn">Add Note</button>
+  <div style="margin-top: 20px;">
+    <h3>View Notes by Category</h3>
+    <select id="categorySelect">
+      <option value="">Select a category</option>
+      <!-- Categories will be loaded here -->
+    </select>
+    <button id="viewByCategoryBtn">View</button>
   </div>
+</div>
 
-  <div class="container">
-    <h2>View Notes</h2>
-    <button id="viewAllNotesBtn">View All Notes</button>
-    
-    <div style="margin-top: 20px;">
-      <h3>View Notes by Category</h3>
-      <select id="categorySelect">
-        <option value="">Select a category</option>
-        <!-- Categories will be loaded here -->
-      </select>
-      <button id="viewByCategoryBtn">View</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
-</html>
+</html> 
