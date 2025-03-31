@@ -1,0 +1,315 @@
+/* Dark Mode + Subtle Glowy Effect */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Default font for both body content and headings */
+}
+
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    padding-bottom: 60px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif; /* Using Poppins for headings */
+    font-weight: normal;
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Subtle glow effect */
+}
+
+h1 {
+    font-size: 40px;
+    margin: 40px 0 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 28px;
+    margin: 30px 0 20px;
+}
+
+h3 {
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #444444;
+    font-size: 17px;
+    margin-bottom: 20px;
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-height: 180px;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #0071e3;
+    box-shadow: 0 0 0 4px rgba(0, 125, 250, 0.2);
+}
+
+button {
+    padding: 12px 22px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #1d1d1f;
+    border: none;
+    border-radius: 980px;
+    font-size: 14px;
+    font-weight: bold; /* Bold text for buttons */
+    letter-spacing: -0.02em;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+select {
+    padding: 12px 16px;
+    margin-right: 10px;
+    border-radius: 12px;
+    border: 1px solid #444444;
+    font-size: 14px;
+    appearance: none;
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+    min-width: 200px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #0071e3;
+    box-shadow: 0 0 0 4px rgba(0, 125, 250, 0.2);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.input-group button {
+    margin-right: 0;
+}
+
+.apple-nav {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    padding: 0 22px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    align-items: center;
+}
+
+.apple-nav .app-title {
+    font-size: 17px;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.notes-list {
+    margin-top: 30px;
+}
+
+.note-item {
+    background-color: #1c1c1c;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid #444444;
+}
+
+.note-content {
+    font-size: 17px;
+    line-height: 1.47059;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.note-category {
+    display: inline-block;
+    background-color: #444444;
+    color: #f5f5f7;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 113, 227, 0.2);
+    border-radius: 50%;
+    border-top-color: #0071e3;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 32px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    .container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    select {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
+
+
+/* Note Card Styles */
+.note-card {
+    background-color: #1c1c1c;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #444444;
+  }
+  
+  .note-content {
+    font-size: 17px;
+    line-height: 1.47059;
+    color: #e0e0e0;
+  }
+  
+  .note-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .note-text {
+    color: #e0e0e0;
+    margin-bottom: 15px;
+  }
+  
+  .note-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button {
+    padding: 12px 22px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #1d1d1f;
+    border: none;
+    border-radius: 980px;
+    font-size: 14px;
+    font-weight: bold; /* Bold text for buttons */
+    letter-spacing: -0.02em;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;
+  }
+  
+  .edit-btn {
+    background-color: #0071e3;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Loading Spinner */
+  .loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 113, 227, 0.2);
+    border-radius: 50%;
+    border-top-color: #0071e3;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
