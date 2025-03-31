@@ -21,7 +21,23 @@
 <div class="container">
   <h2>What's on your mind?</h2>
   <textarea id="noteContent" placeholder="Enter your note here..." rows="6"></textarea><br>
-  <button id="addNoteBtn">Add Note</button>
+  <div class="button-container">
+    <button id="addNoteBtn">Add Note</button>
+    <button id="recordBtn" class="record-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mic-icon">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+        <line x1="12" y1="19" x2="12" y2="22"></line>
+      </svg>
+      Record Note
+    </button>
+  </div>
+  
+  <!-- Recording Status Indicator -->
+  <div id="recordingStatus" class="recording-status hidden">
+    <div class="recording-indicator"></div>
+    <span>Recording...</span>
+  </div>
 </div>
 
 <div class="container">
@@ -40,4 +56,4 @@
 
 <script src="script.js"></script>
 </body>
-</html> 
+</html>
