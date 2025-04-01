@@ -2,7 +2,7 @@
 
 ## 📝 MindCapture
 
-**An AI-Powered Note-Taking App for Real-Time Summarization and Categorization**
+**A completely local AI-Powered Note-Taker that becomes your second brain over time**
 
 ![GitHub Stars](https://img.shields.io/github/stars/delbyte/local-ai-notes?style=social)
 ![GitHub License](https://img.shields.io/github/license/delbyte/local-ai-notes)
@@ -10,7 +10,7 @@
 
 ## 🚀 Project Overview
 
-`MindCapture` is an AI-powered note-taking application designed to help users capture, summarize, and categorize notes in real-time. By leveraging advanced AI technology, users can efficiently manage their notes, quickly extract key information, and automatically organize content based on its theme.
+**MindCapture** is a **completely local** AI-powered note-taking application designed to help users capture, summarize, and categorize notes in real-time. By leveraging advanced AI technology, users can efficiently manage their notes, quickly extract key information, and automatically organize content based on its theme.
 
 ## 🌟 Key Features
 
@@ -36,11 +36,11 @@
 
 ## 🛠️ Technology Stack
 
-- **Programming Language**: Python
-- **AI Models**: Built on Hugging Face Transformers and LangChain
-- **GUI Framework**: Tkinter or PyQt
-- **Data Storage**: SQLite or JSON files
-- **Additional Tools**: Flask (API service), Docker (containerized deployment)
+- **Backend**: Python and FastAPI
+- **Frontend**: HTML, CSS, JavaScript
+- **GUI Framework**: Pure CSS
+- **Data Storage**: SQLite
+- **Additional Tools**: FastAPI (API service), BART MNLI (local AI model)
 
 ## 📦 Installation & Usage
 
